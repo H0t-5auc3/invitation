@@ -362,9 +362,6 @@ button:hover {
     will-change: transform, opacity;
 }
 
-
-
-
 /* Стили кнопки */
 #play-music-btn {
     position: absolute;
@@ -405,5 +402,33 @@ button:hover {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero img {
+        height: 100vh;
+        /* фото занимает весь экран по высоте */
+        object-fit: cover;
+        /* сохраняем пропорции и обрезку по краям */
+        object-position: 60% center;
+        /* смещаем фото горизонтально: 50% - центр, >50% вправо, <50% влево */
+    }
+
+    .hero-text {
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-number {
+        font-size: 18vw;
+    }
+
+    .hero-sub {
+        font-size: 12vw;
     }
 }
