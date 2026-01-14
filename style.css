@@ -392,13 +392,39 @@ button:hover {
     /* чтобы была под текстом */
 }
 
-#play-music-btn {
-    position: absolute;
-    bottom: 14%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateY(20px) scale(0.9);
-    /* начальное смещение для анимации */
+.play-icon {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid transparent;
+    /* transparent fill */
+    position: relative;
+}
 
+/* Triangle outline */
+.play-icon::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -16px;
+
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid #2f3b52;
+    /* outline color */
+}
+
+#play-music-btn {
+    /* Убираем абсолютное позиционирование, заменяем на обычный блок */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    /* Фиксированный отступ от текста */
+
+    position: relative;
+    /* Чтобы работал z-index, если нужно */
     width: 60px;
     height: 60px;
     border: none;
@@ -409,36 +435,29 @@ button:hover {
     box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.25);
 
     opacity: 0;
-    /* изначально скрыта */
     animation: fadeUpZoomBtn 1s ease forwards;
     animation-delay: 1.5s;
-
     transition: all 0.3s ease;
-
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M35 30 L75 50 L35 70 Z" fill="black"/></svg>'),
-        linear-gradient(#fff, #fff);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M35 30 L75 50 L35 70 Z" fill="black"/></svg>'),
-        linear-gradient(#fff, #fff);
 }
 
-#play-music-btn:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-    background-color: #ffffff;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.35);
-}
-
+/* Обновляем анимацию (убираем привязку к центру экрана через translate) */
 @keyframes fadeUpZoomBtn {
     from {
         opacity: 0;
-        transform: translate(-50%, -50%) translateY(20px) scale(0.9);
+        transform: translateY(20px) scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, -50%) translateY(0) scale(1);
+        transform: translateY(0) scale(1);
     }
+}
+
+/* Обновляем эффект наведения */
+#play-music-btn:hover {
+    transform: scale(1.1);
+    background-color: #ffffff;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes fadeZoom {
@@ -505,5 +524,3 @@ button:hover {
         font-size: 12vw;
     }
 }
-
-
